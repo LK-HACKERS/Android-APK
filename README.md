@@ -128,3 +128,49 @@ Do not use against devices you do not own or have explicit permission to test.
 Built for red teamers, bug hunters, and Android security researchers.
 Pull requests and obfuscation improvements are welcome.
 
+
+## SINHALA
+
+*සාමාන්‍ය msfvenom පේලෝඩ් එකක් දැන් ඕනෑම ෆෝන් එකක Play Protect එකට අහුවෙනවා. ඒකට හේතුව ඒකේ Signature එක antivirus වලට දැනුම් දීලා තියෙන නිසයි.උඹට ඕනේ Obfuscation (කෝඩ් එක සංකීර්ණ කිරීම) කරන්න පුළුවන් පවර්ෆුල් ස්ක්‍රිප්ට එකක්. ඇත්තටම Obfuscator-LLVM වගේ දේවල් compiler මට්ටමින් වැඩ කරන ඒවා. ඒ නිසා මේ tool එක වැඩ කරන්නේ Android APK Obfuscator & Encryptor එකක් විදිහට වැඩ කරන, Termux, Kali, Ubuntu සහ macOS වලට ගැලපෙන Bash framework එකක් විදිහට.මෙම tool එකෙන් එක මගින් පේලෝඩ් එක සාදා,  Obfuscate කර, අලුත් නමකින් repack කරලා ලබා දෙනවා.*
+
+**1) Signature Modification:**
+
+* Antivirus වලට අහුවෙන්නේ com.metasploit වගේ package names නිසා. මේ ස්ක්‍රිප්ට් එකෙන් කරන්නේ sed command එක පාවිච්චි කරලා ඒ package names random strings වලට replace කරන එකයි.
+
+**2) Decompile & Rebuild:**
+
+* apktool හරහා APK එක කෑලි වලට කඩලා, ඇතුළත තියෙන Smali code එක වෙනස් කරලා ආයෙත් build කරනවා.
+
+**3) Signing (අත්සන් කිරීම):**
+
+* Android device එකකට App එකක් install කරන්න නම් අනිවාර්යයෙන්ම Signing වෙන්න ඕනේ. මම මෙතනට keytool සහ jarsigner ඇතුළත් කළා, එවිට App එක install වෙද්දී "App not installed" error එක එන්නේ නැහැ.
+
+**4) Zipalign:**
+
+* මේකෙන් App එක optimize කරනවා, එවිට එය සාමාන්‍ය App එකක් වගේ පෙනෙනවා.
+
+## 🚀 Install කරගන්නා ආකාරය:
+
+**Kali/Ubuntu සඳහා:**
+
+```bash
+sudo apt update
+sudo apt install --fix-missing
+apt-cache search openjdk
+sudo apt update
+sudo apt install apktool openjdk-17-jdk zipalign
+sudo apt install apktool openjdk-21-jdk zipalign
+sudo apt install apktool openjdk-17 zipalign
+```
+
+**Termux සඳහා:**
+
+```bash
+pkg install apktool openssl openjdk-17 zipalign
+```
+
+**MacOS සඳහා:**
+
+```bash
+brew install apktool
+```
